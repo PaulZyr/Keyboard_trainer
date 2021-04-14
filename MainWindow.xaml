@@ -1,0 +1,216 @@
+﻿<Window x:Class="Home0416_KeyboardTrainer2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Home0416_KeyboardTrainer2"
+        mc:Ignorable="d"
+        Title="Keyboard Password Trainer" Height="700" Width="1400" 
+        WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" Loaded="Window_Loaded" TextInput="Window_TextInput">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <WrapPanel Grid.Column="0">
+                <Label>Speed:</Label>
+                <Label x:Name="speedLabel" FontWeight="Bold">0</Label>
+                <Label>chars/min</Label>
+            </WrapPanel>
+            <WrapPanel Grid.Column="1">
+                <Label>Fails:</Label>
+                <Label x:Name="failsLabel" FontWeight="Bold">0</Label>
+            </WrapPanel>
+            <WrapPanel Grid.Column="2">
+                <Label>Difficulty:</Label>
+                <Label FontWeight="Bold" Content="{Binding Value, ElementName=difficultySlider}"></Label>
+                <Slider x:Name="difficultySlider" Maximum="4"/>
+            </WrapPanel>
+            <WrapPanel Grid.Column="3">
+                <CheckBox x:Name="caseSensCheckBox" VerticalContentAlignment="Center" FontSize="20">Case Sensitive</CheckBox>
+            </WrapPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="startButton" Grid.Column="0" Style="{StaticResource squareButton}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="startButton_Click">Start</Button>
+                <Button x:Name="stopButton" Grid.Column="1" Style="{StaticResource squareButton}" IsEnabled="False" Click="stopButton_Click">Stop</Button>
+            </Grid>
+            <Label x:Name="endLabel" Grid.Column="0" HorizontalContentAlignment="Center" FontSize="24" Foreground="DarkRed" FontWeight="Bold"></Label>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <StackPanel Background="LightBlue">
+                <WrapPanel x:Name="goalStackPanel"></WrapPanel>
+                <WrapPanel x:Name="resultStackPanel"></WrapPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="Oem3" Style="{StaticResource buttonLabel}" Grid.Column="0" Background="#F07795">`</Label>
+            <Label x:Name="D1" Style="{StaticResource buttonLabel}" Grid.Column="1" Background="#F07795">1</Label>
+            <Label x:Name="D2" Style="{StaticResource buttonLabel}" Grid.Column="2" Background="#F07795">2</Label>
+            <Label x:Name="D3" Style="{StaticResource buttonLabel}" Grid.Column="3" Background="#E6F077">3</Label>
+            <Label x:Name="D4" Style="{StaticResource buttonLabel}" Grid.Column="4" Background="#7FF077">4</Label>
+            <Label x:Name="D5" Style="{StaticResource buttonLabel}" Grid.Column="5" Background="#FF77BEF0">5</Label>
+            <Label x:Name="D6" Style="{StaticResource buttonLabel}" Grid.Column="6" Background="#FF77BEF0">6</Label>
+            <Label x:Name="D7" Style="{StaticResource buttonLabel}" Grid.Column="7" Background="#FFDB77F0">7</Label>
+            <Label x:Name="D8" Style="{StaticResource buttonLabel}" Grid.Column="8" Background="#FFDB77F0">8</Label>
+            <Label x:Name="D9" Style="{StaticResource buttonLabel}" Grid.Column="9" Background="#F07795">9</Label>
+            <Label x:Name="D0" Style="{StaticResource buttonLabel}" Grid.Column="10" Background="#E6F077">0</Label>
+            <Label x:Name="OemMinus" Style="{StaticResource buttonLabel}" Grid.Column="11" Background="#7FF077">-</Label>
+            <Label x:Name="OemPlus" Style="{StaticResource buttonLabel}" Grid.Column="12" Background="#7FF077">=</Label>
+            <Label x:Name="Back" Style="{StaticResource servLabel}" Grid.Column="13">Backspace</Label>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="Tab" Style="{StaticResource servLabel}" Grid.Column="0">Tab</Label>
+            <Label x:Name="Q" Style="{StaticResource buttonLabel}" Grid.Column="1" Background="#F07795">q</Label>
+            <Label x:Name="W" Style="{StaticResource buttonLabel}" Grid.Column="2" Background="#E6F077">w</Label>
+            <Label x:Name="E" Style="{StaticResource buttonLabel}" Grid.Column="3" Background="#7FF077">e</Label>
+            <Label x:Name="R" Style="{StaticResource buttonLabel}" Grid.Column="4" Background="#FF77BEF0">r</Label>
+            <Label x:Name="T" Style="{StaticResource buttonLabel}" Grid.Column="5" Background="#FF77BEF0">t</Label>
+            <Label x:Name="Y" Style="{StaticResource buttonLabel}" Grid.Column="6" Background="#FFDB77F0">y</Label>
+            <Label x:Name="U" Style="{StaticResource buttonLabel}" Grid.Column="7" Background="#FFDB77F0">u</Label>
+            <Label x:Name="I" Style="{StaticResource buttonLabel}" Grid.Column="8" Background="#F07795">i</Label>
+            <Label x:Name="O" Style="{StaticResource buttonLabel}" Grid.Column="9" Background="#E6F077">o</Label>
+            <Label x:Name="P" Style="{StaticResource buttonLabel}" Grid.Column="10" Background="#7FF077">p</Label>
+            <Label x:Name="OemOpenBrackets" Style="{StaticResource buttonLabel}" Grid.Column="11" Background="#7FF077">[</Label>
+            <Label x:Name="Oem6" Style="{StaticResource buttonLabel}" Grid.Column="12" Background="#7FF077">]</Label>
+            <Label x:Name="Oem5" Style="{StaticResource buttonLabel}" Grid.Column="13" Background="#7FF077">\</Label>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="Capital" Style="{StaticResource servLabel}" Grid.Column="0">Caps Lock</Label>
+            <Label x:Name="A" Style="{StaticResource buttonLabel}" Grid.Column="1" Background="#F07795">a</Label>
+            <Label x:Name="S" Style="{StaticResource buttonLabel}" Grid.Column="2" Background="#E6F077">s</Label>
+            <Label x:Name="D" Style="{StaticResource buttonLabel}" Grid.Column="3" Background="#7FF077">d</Label>
+            <Label x:Name="F" Style="{StaticResource buttonLabel}" Grid.Column="4" Background="#FF77BEF0">f</Label>
+            <Label x:Name="G" Style="{StaticResource buttonLabel}" Grid.Column="5" Background="#FF77BEF0">g</Label>
+            <Label x:Name="H" Style="{StaticResource buttonLabel}" Grid.Column="6" Background="#FFDB77F0">h</Label>
+            <Label x:Name="J" Style="{StaticResource buttonLabel}" Grid.Column="7" Background="#FFDB77F0">j</Label>
+            <Label x:Name="K" Style="{StaticResource buttonLabel}" Grid.Column="8" Background="#F07795">k</Label>
+            <Label x:Name="L" Style="{StaticResource buttonLabel}" Grid.Column="9" Background="#E6F077">l</Label>
+            <Label x:Name="Oem1" Style="{StaticResource buttonLabel}" Grid.Column="10" Background="#7FF077">;</Label>
+            <Label x:Name="OemQuotes" Style="{StaticResource buttonLabel}" Grid.Column="11" Background="#7FF077">'</Label>
+            <Label x:Name="Return" Style="{StaticResource servLabel}" Grid.Column="12">Enter</Label>
+        </Grid>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.5*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="LeftShift" Style="{StaticResource servLabel}" Grid.Column="0">Shift</Label>
+            <Label x:Name="Z" Style="{StaticResource buttonLabel}" Grid.Column="1" Background="#F07795">z</Label>
+            <Label x:Name="X" Style="{StaticResource buttonLabel}" Grid.Column="2" Background="#E6F077">x</Label>
+            <Label x:Name="C" Style="{StaticResource buttonLabel}" Grid.Column="3" Background="#7FF077">c</Label>
+            <Label x:Name="V" Style="{StaticResource buttonLabel}" Grid.Column="4" Background="#FF77BEF0">v</Label>
+            <Label x:Name="B" Style="{StaticResource buttonLabel}" Grid.Column="5" Background="#FF77BEF0">b</Label>
+            <Label x:Name="N" Style="{StaticResource buttonLabel}" Grid.Column="6" Background="#FFDB77F0">n</Label>
+            <Label x:Name="M" Style="{StaticResource buttonLabel}" Grid.Column="7" Background="#FFDB77F0">m</Label>
+            <Label x:Name="OemComma" Style="{StaticResource buttonLabel}" Grid.Column="8" Background="#F07795">,</Label>
+            <Label x:Name="OemPeriod" Style="{StaticResource buttonLabel}" Grid.Column="9" Background="#E6F077">.</Label>
+            <Label x:Name="OemQuestion" Style="{StaticResource buttonLabel}" Grid.Column="10" Background="#7FF077">/</Label>
+            <Label x:Name="RightShift" Style="{StaticResource servLabel}" Grid.Column="11">Shift</Label>
+        </Grid>
+
+        <Grid Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="LeftCtrl" Style="{StaticResource servLabel}" Grid.Column="0">Ctrl</Label>
+            <Label x:Name="LWin" Style="{StaticResource servLabel}" Grid.Column="1">Win</Label>
+            <Label Style="{StaticResource servLabel}" Grid.Column="2">Alt</Label>
+            <Label x:Name="Space" Style="{StaticResource servLabel}" Grid.Column="3" Background="#FFE5BB72">Space</Label>
+            <Label Style="{StaticResource servLabel}" Grid.Column="4">Alt</Label>
+            <Label x:Name="RWin" Style="{StaticResource servLabel}" Grid.Column="5">Win</Label>
+            <Label x:Name="RightCtrl" Style="{StaticResource servLabel}" Grid.Column="6">Ctrl</Label>
+        </Grid>
+    </Grid>
+</Window>
